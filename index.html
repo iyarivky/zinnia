@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Zinnia</title>
+</head>
+<body>
+    <h1>Zinnia</h1>
+    <form id="text-form">
+        <label for="filename">File name:</label><br>
+        <input type="text" id="filename" name="filename"><br><br>
+        <label for="text-content">Text content:</label><br>
+        <textarea id="text-content" name="text-content"></textarea><br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        document.getElementById("text-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let filename = document.getElementById("filename").value;
+            let textContent = document.getElementById("text-content").value;
+            let data = {
+                "nama_text": filename,
+                "isi_text": textContent
+            };
+            fetch("/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            }).then(response => response.json())
+              .then(data => {
+                  if (data.success) {
+                      alert("File berhasil disimpan!");
+                  }
+              });
+        });
+    </script>
+</body>
+</html>
