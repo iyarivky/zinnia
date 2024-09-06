@@ -2,7 +2,7 @@
 # see: https://developers.google.com/idx/guides/customize-idx-env
 {pkgs}: {
   # Which nixpkgs channel to use.
-  channel = "unstable" # or stable-23.11
+  channel = "unstable"; # or stable-23.11
   # Use https://search.nixos.org/packages to find packages
   packages = [
     pkgs.deno
@@ -12,7 +12,7 @@
   idx = {
     # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
     extensions = [
-      # "vscodevim.vim"
+      "denoland.vscode-deno"
     ];
     workspace = {
       # Runs when a workspace is first created with this `dev.nix` file
@@ -26,7 +26,7 @@
       enable = true;
       previews = [
         {
-          command = ["deno" "task" "dev"];
+          command = ["deno" "task" "dev" "--" "--port" "$PORT" "--hostname" "0.0.0.0"];
           manager = "web";
           id = "web";
         }
